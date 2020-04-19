@@ -36,7 +36,7 @@
     </div>
   </div>
 
-  <div fxFlex fxFlexOffset="20px" class="form-size">
+  <div fxFlex fxFlexOffset="20px" class="form-size" [hidden]="timer1">
     <h3>Send us your Feedback</h3>
     <p>{{feedbackForm.value | json}} {{feedbackForm.status | json}}</p>
     <form novalidate [formGroup]="feedbackForm"  #fform="ngForm" (ngSubmit)="onSubmit()">
@@ -88,4 +88,43 @@
       <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="feedbackForm.invalid">Submit</button>
     </form>
   </div>
+
+  <div fxFlex [hidden]="feedback||errMess|| timer2">
+		<mat-spinner></mat-spinner><h4>Submitting Form</h4>
+  </div>
+
+<div fxFlex fxFlexOffset="20px" class="form-size" *ngIf="feedback">
+  <mat-list >
+    <h3>Send us your Feedback</h3>
+    <h5>Your Submission</h5>
+    <mat-list-item>
+      <p matLine>
+        <span> First Name:&nbsp;&nbsp;{{feedback.firstname}} </span>
+      </p>
+     <p matLine>
+      <span> Last Name:&nbsp;&nbsp;{{feedback.lastname}} </span>
+      </p>
+     <p matLine>
+      <span> Tel.Number:&nbsp;&nbsp;{{feedback.telnum}} </span>
+      </p>
+      <p matLine>
+        <span> Email:&nbsp;&nbsp;{{feedback.email}} </span>
+        </p>
+      <p matLine>
+        <span> Contact You?:&nbsp;&nbsp;{{feedback.agree}} </span>
+        </p>
+      <p matLine>
+        <span> How?:&nbsp;&nbsp;{{feedback.contacttype}} </span>
+      </p>
+      <p matLine>
+        <span> Feedback:&nbsp;&nbsp;{{feedback.message}} </span>
+      </p>
+    </mat-list-item>
+    </mat-list>
+
+</div>
+<div fxFlex *ngIf="errMess">
+  <h2>Error</h2>
+  <h4>{{errMess}}</h4>
+</div>
 </div>
